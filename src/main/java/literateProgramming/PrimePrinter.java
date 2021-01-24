@@ -2,22 +2,20 @@ package literateProgramming;
 
 public class PrimePrinter {
     private static final int numberOfPrimes = 1000;
+    private static final int linesPerPage = 50;
+    private static final int columnsPerPage = 4;
+
     public static void main(String[] args) {
         final PrimePrinterHelper primePrinterHelper = new PrimePrinterHelper();
         int[] primes = primePrinterHelper.generatePrimes();
-        primePrinterHelper.printNumbers(primes, numberOfPrimes);
+        new NumberPrinter(linesPerPage, columnsPerPage).print(primes, numberOfPrimes);
     }
 }
 
 class PrimePrinterHelper {
     private final int numberOfPrimes = 1000;
-    private final int linesPerPage = 50;
-    private final int columnsPerPage = 4;
     private final int ord_max = 30;
     private final int[] primes = new int[numberOfPrimes + 1];
-    private int pageNumber;
-    private int rowOffset;
-    private int column;
     private int candidate = 1;
     private int primeIndex = 1;
     private boolean possiblyPrime;
@@ -51,9 +49,4 @@ class PrimePrinterHelper {
         }
         return primes;
     }
-
-    public void printNumbers(int[] numbers, int numberOfNumbers) {
-        new NumberPrinter(linesPerPage, columnsPerPage).print(numbers, numberOfNumbers);
-    }
-
 }
