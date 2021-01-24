@@ -7,66 +7,63 @@ public class PrimePrinter {
 }
 
 class PrimePrinterHelper {
-    public void invoke() {
-        final int M = 1000;
-        final int RR = 50;
-        final int CC = 4;
-        final int ORD_MAX = 30;
-        int[] P = new int[M + 1];
-        int PAGE_NUMBER;
-        int ROW_OFFSET;
-        int C;
-        int J;
-        int K;
-        boolean JPRIME;
-        int ORD;
-        int SQUARE;
-        int N;
-        int[] MULT = new int[ORD_MAX + 1];
 
-        J = 1;
-        K = 1;
-        P[1] = 2;
-        ORD = 2;
-        SQUARE = 9;
-        while (K < M) {
+    private final int numberOfPrimes = 1000;
+    private final int linesPerPage = 50;
+    private final int columnsPerPage = 4;
+    private final int ord_max = 30;
+    private final int[] primes = new int[numberOfPrimes + 1];
+    private int pageNumber;
+    private int rowOffset;
+    private int column;
+    private int candidate = 1;
+    private int primeIndex = 1;
+    private boolean possiblyPrime;
+    private int ord = 2;
+    private int square = 9;
+    private int n;
+    private final int[] multiples = new int[ord_max + 1];
+
+    public void invoke() {
+        primes[1] = 2;
+        while (primeIndex < numberOfPrimes) {
             do {
-                J += 2;
-                if (J == SQUARE) {
-                    ORD++;
-                    SQUARE = P[ORD] * P[ORD];
-                    MULT[ORD - 1] = J;
+                candidate += 2;
+                if (candidate == square) {
+                    ord++;
+                    square = primes[ord] * primes[ord];
+                    multiples[ord - 1] = candidate;
                 }
-                N = 2;
-                JPRIME = true;
-                while (N < ORD && JPRIME) {
-                    while (MULT[N] < J)
-                        MULT[N] += P[N] + P[N];
-                    if (MULT[N] == J)
-                        JPRIME = false;
-                    N++;
+                n = 2;
+                possiblyPrime = true;
+                while (n < ord && possiblyPrime) {
+                    while (multiples[n] < candidate)
+                        multiples[n] += primes[n] + primes[n];
+                    if (multiples[n] == candidate)
+                        possiblyPrime = false;
+                    n++;
                 }
-            } while (!JPRIME);
-            K++;
-            P[K] = J;
+            } while (!possiblyPrime);
+            primeIndex++;
+            primes[primeIndex] = candidate;
         }
-        PAGE_NUMBER = 1;
+        pageNumber = 1;
         int PAGE_OFFSET = 1;
-        while (PAGE_OFFSET <= M) {
+        while (PAGE_OFFSET <= numberOfPrimes) {
             System.out.print("The First ");
-            System.out.print(M);
+            System.out.print(numberOfPrimes);
             System.out.print(" Prime Numbers --- Page ");
-            System.out.print(PAGE_NUMBER);
+            System.out.print(pageNumber);
             System.out.println("\n");
-            for (ROW_OFFSET = PAGE_OFFSET; ROW_OFFSET <= PAGE_OFFSET + RR - 1; ROW_OFFSET++) {
-                for (C = 0; C <= CC - 1; C++)
-                    if (ROW_OFFSET + C * RR <= M)
-                        System.out.printf("%10d", P[ROW_OFFSET + C * RR]);
+            for (rowOffset = PAGE_OFFSET; rowOffset <= PAGE_OFFSET + linesPerPage - 1; rowOffset++) {
+                for (column = 0; column <= columnsPerPage - 1; column++)
+                    if (rowOffset + column * linesPerPage <= numberOfPrimes)
+                        System.out.printf("%10d", primes[rowOffset + column * linesPerPage]);
                 System.out.println();
             }
             System.out.println("\f");
-            PAGE_NUMBER++;
-            PAGE_OFFSET += RR * CC;
+            pageNumber++;
+            PAGE_OFFSET += linesPerPage * columnsPerPage;
         }
     }
 }
