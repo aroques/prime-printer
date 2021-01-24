@@ -47,18 +47,22 @@ class PrimePrinterHelper {
             primeIndex++;
             primes[primeIndex] = candidate;
         }
+        printNumbers(primes, numberOfPrimes);
+    }
+
+    private void printNumbers(int[] numbers, int numberOfNumbers) {
         pageNumber = 1;
         int PAGE_OFFSET = 1;
-        while (PAGE_OFFSET <= numberOfPrimes) {
+        while (PAGE_OFFSET <= numberOfNumbers) {
             System.out.print("The First ");
-            System.out.print(numberOfPrimes);
+            System.out.print(numberOfNumbers);
             System.out.print(" Prime Numbers --- Page ");
             System.out.print(pageNumber);
             System.out.println("\n");
             for (rowOffset = PAGE_OFFSET; rowOffset <= PAGE_OFFSET + linesPerPage - 1; rowOffset++) {
                 for (column = 0; column <= columnsPerPage - 1; column++)
-                    if (rowOffset + column * linesPerPage <= numberOfPrimes)
-                        System.out.printf("%10d", primes[rowOffset + column * linesPerPage]);
+                    if (rowOffset + column * linesPerPage <= numberOfNumbers)
+                        System.out.printf("%10d", numbers[rowOffset + column * linesPerPage]);
                 System.out.println();
             }
             System.out.println("\f");
