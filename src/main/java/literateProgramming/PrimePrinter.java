@@ -53,23 +53,7 @@ class PrimePrinterHelper {
     }
 
     public void printNumbers(int[] numbers, int numberOfNumbers) {
-        pageNumber = 1;
-        int PAGE_OFFSET = 1;
-        while (PAGE_OFFSET <= numberOfNumbers) {
-            System.out.print("The First ");
-            System.out.print(numberOfNumbers);
-            System.out.print(" Prime Numbers --- Page ");
-            System.out.print(pageNumber);
-            System.out.println("\n");
-            for (rowOffset = PAGE_OFFSET; rowOffset <= PAGE_OFFSET + linesPerPage - 1; rowOffset++) {
-                for (column = 0; column <= columnsPerPage - 1; column++)
-                    if (rowOffset + column * linesPerPage <= numberOfNumbers)
-                        System.out.printf("%10d", numbers[rowOffset + column * linesPerPage]);
-                System.out.println();
-            }
-            System.out.println("\f");
-            pageNumber++;
-            PAGE_OFFSET += linesPerPage * columnsPerPage;
-        }
+        new NumberPrinter(linesPerPage, columnsPerPage).print(numbers, numberOfNumbers);
     }
+
 }
