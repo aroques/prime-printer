@@ -1,13 +1,15 @@
 package literateProgramming;
 
 public class PrimePrinter {
+    private static final int numberOfPrimes = 1000;
     public static void main(String[] args) {
-        new PrimePrinterHelper().invoke();
+        final PrimePrinterHelper primePrinterHelper = new PrimePrinterHelper();
+        int[] primes = primePrinterHelper.generatePrimes();
+        primePrinterHelper.printNumbers(primes, numberOfPrimes);
     }
 }
 
 class PrimePrinterHelper {
-
     private final int numberOfPrimes = 1000;
     private final int linesPerPage = 50;
     private final int columnsPerPage = 4;
@@ -24,7 +26,7 @@ class PrimePrinterHelper {
     private int n;
     private final int[] multiples = new int[ord_max + 1];
 
-    public void invoke() {
+    public int[] generatePrimes() {
         primes[1] = 2;
         while (primeIndex < numberOfPrimes) {
             do {
@@ -47,10 +49,10 @@ class PrimePrinterHelper {
             primeIndex++;
             primes[primeIndex] = candidate;
         }
-        printNumbers(primes, numberOfPrimes);
+        return primes;
     }
 
-    private void printNumbers(int[] numbers, int numberOfNumbers) {
+    public void printNumbers(int[] numbers, int numberOfNumbers) {
         pageNumber = 1;
         int PAGE_OFFSET = 1;
         while (PAGE_OFFSET <= numberOfNumbers) {
