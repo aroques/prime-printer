@@ -10,7 +10,9 @@ called a *characterization test*.
 
 A characterization test is useful when you need to refactor legacy code, and you have no tests. 
 However, the test is fragile. You might throw the test away after the code is refactored, 
-and you have 'real' tests.
+and you have 'real' tests.  
+
+The large function is refactored to be 3 separate classes.
 
 ## Installation 
 1. If needed, [install Maven](https://maven.apache.org/install.html).
