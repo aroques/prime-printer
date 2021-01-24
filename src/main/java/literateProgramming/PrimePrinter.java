@@ -2,11 +2,17 @@ package literateProgramming;
 
 public class PrimePrinter {
     public static void main(String[] args) {
+        new PrimePrinterHelper().invoke();
+    }
+}
+
+class PrimePrinterHelper {
+    public void invoke() {
         final int M = 1000;
         final int RR = 50;
         final int CC = 4;
         final int ORD_MAX = 30;
-        int[] P = new int[M+1];
+        int[] P = new int[M + 1];
         int PAGE_NUMBER;
         int ROW_OFFSET;
         int C;
@@ -16,7 +22,7 @@ public class PrimePrinter {
         int ORD;
         int SQUARE;
         int N;
-        int[] MULT = new int[ORD_MAX+1];
+        int[] MULT = new int[ORD_MAX + 1];
 
         J = 1;
         K = 1;
@@ -29,12 +35,12 @@ public class PrimePrinter {
                 if (J == SQUARE) {
                     ORD++;
                     SQUARE = P[ORD] * P[ORD];
-                    MULT[ORD-1] = J;
+                    MULT[ORD - 1] = J;
                 }
                 N = 2;
                 JPRIME = true;
                 while (N < ORD && JPRIME) {
-                    while(MULT[N] < J)
+                    while (MULT[N] < J)
                         MULT[N] += P[N] + P[N];
                     if (MULT[N] == J)
                         JPRIME = false;
@@ -52,11 +58,11 @@ public class PrimePrinter {
             System.out.print(" Prime Numbers --- Page ");
             System.out.print(PAGE_NUMBER);
             System.out.println("\n");
-            for (ROW_OFFSET = PAGE_OFFSET; ROW_OFFSET <= PAGE_OFFSET+RR-1; ROW_OFFSET++) {
-                for (C=0; C <= CC-1; C++)
-                    if (ROW_OFFSET+C*RR <= M)
-                        System.out.printf("%10d", P[ROW_OFFSET+C*RR]);
-                    System.out.println();
+            for (ROW_OFFSET = PAGE_OFFSET; ROW_OFFSET <= PAGE_OFFSET + RR - 1; ROW_OFFSET++) {
+                for (C = 0; C <= CC - 1; C++)
+                    if (ROW_OFFSET + C * RR <= M)
+                        System.out.printf("%10d", P[ROW_OFFSET + C * RR]);
+                System.out.println();
             }
             System.out.println("\f");
             PAGE_NUMBER++;
